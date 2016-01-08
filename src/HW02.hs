@@ -39,6 +39,7 @@ countColor colorToCount = length . filter (==colorToCount)
 
 -- Count number of matches between the actual code and the guess
 matches :: Code -> Code -> Int
+-- TODO[egarcia]: Convert to "pointfree" style
 matches code1 code2 = sum (zipWith min (countColors code1) (countColors code2))
 
 -- Exercise 3 -----------------------------------------
