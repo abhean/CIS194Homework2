@@ -31,11 +31,15 @@ exactMatches (x:xs) (y:ys) = (if x == y then 1 else 0) + exactMatches xs ys
 
 -- For each peg in xs, count how many times is occurs in ys
 countColors :: Code -> [Int]
-countColors = undefined
+-- NOTE[egarcia]: This seems to be O(n2) when it should be O(n). Should I index a colors table by enum value index? how?
+countColors code = map (\color -> countColor color code) colors
+
+countColor :: Peg -> Code -> Int
+countColor colorToCount = length . filter (==colorToCount)
 
 -- Count number of matches between the actual code and the guess
 matches :: Code -> Code -> Int
-matches = undefined
+matches code1 code2 = sum (zipWith min (countColors code1) (countColors code2))
 
 -- Exercise 3 -----------------------------------------
 
